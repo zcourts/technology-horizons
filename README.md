@@ -18,23 +18,35 @@ The internal links use the `/technology-horizons/` project path, so they are rea
 
 ## Google Sheet submissions
 
-The Contact and Suggest Talk dialogs are injected by `assets/js/site.js` and submit URL-encoded payloads to a configurable endpoint.
+The Contact and Suggest Talk dialogs are injected by `assets/js/site.js`. They
+post JSON to a Google Apps Script web app, which writes into spreadsheet
+`12of6lHoykHXQbjIkHjsQbV7FqINGk3D_nG24yDAioYs`. The receiver creates separate
+`Contact messages` and `Talk submissions` tabs on first use, plus an
+`All submissions` tab containing both form types.
 
-In `assets/js/site.js`, replace:
+To deploy the receiver:
+
+1. Open the spreadsheet and select **Extensions → Apps Script**.
+2. Paste `docs/google-sheets-endpoint.gs` into the editor.
+3. Select **Deploy → New deployment → Web app**.
+4. Set **Execute as** to **Me** and **Who has access** to **Anyone**.
+5. Deploy, then copy the generated `/exec` URL into the
+   `TECHNOLOGY_HORIZONS_ENDPOINT` constant in `assets/js/site.js`.
+
+The current deployment is configured as:
 
 ```js
-const TECHNOLOGY_HORIZONS_ENDPOINT = "";
+const TECHNOLOGY_HORIZONS_ENDPOINT = "https://script.google.com/macros/s/AKfycbwLDZWEpgJpI2Lf6TLkbw0h3wY7sj7bVsXaUWP5tm0XNJX_zS5I1B-EHyvMGvfq3IqVhg/exec";
 ```
 
-with the deployed endpoint that writes into your Google Sheet, for example:
+The browser sends the payload as `text/plain` with `mode: "no-cors"`, matching
+the static-site pattern used by Worka. Because `no-cors` responses are opaque,
+the UI treats the request as submitted when the network call resolves. The
+receiver independently validates the payload before storing it.
 
-```js
-const TECHNOLOGY_HORIZONS_ENDPOINT = "https://script.google.com/macros/s/YOUR_DEPLOYMENT_ID/exec";
-```
-
-The JavaScript currently uses `mode: "no-cors"`, which is usually the simplest approach for a static page posting to a Google Apps Script web app. Because `no-cors` responses are opaque in the browser, the UI treats the request as submitted when the network call resolves.
-
-A sample Apps Script receiver is included in `docs/google-sheets-endpoint.example.gs`.
+The web app is intentionally public because a static site cannot keep an API
+credential secret. It accepts only the two known form types, rejects malformed
+payloads, drops honeypot submissions, and protects cells from formula injection.
 
 ## SEO
 

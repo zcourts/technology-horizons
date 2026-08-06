@@ -1,9 +1,9 @@
 (() => {
   "use strict";
 
-  // Paste the deployed endpoint that writes submissions to your Google Sheet.
-  // The forms send application/x-www-form-urlencoded data, suitable for Google Apps Script doPost(e).
-  const TECHNOLOGY_HORIZONS_ENDPOINT = "";
+  // Paste the deployed /exec URL from docs/google-sheets-endpoint.gs.
+  // The receiver is bound server-side to the Technology Horizons spreadsheet.
+  const TECHNOLOGY_HORIZONS_ENDPOINT = "https://script.google.com/macros/s/AKfycbwLDZWEpgJpI2Lf6TLkbw0h3wY7sj7bVsXaUWP5tm0XNJX_zS5I1B-EHyvMGvfq3IqVhg/exec";
   const FETCH_MODE = "no-cors";
 
   const copy = {
@@ -200,11 +200,16 @@
       return;
     }
 
-    formData.set("form_type", form.dataset.formType || "unknown");
-    formData.set("page_url", window.location.href);
-    formData.set("page_title", document.title);
-    formData.set("site_language", language);
-    formData.set("submitted_at", new Date().toISOString());
+    const payload = {};
+    formData.forEach((value, key) => {
+      payload[key] = value;
+    });
+    payload.form_type = form.dataset.formType || "unknown";
+    payload.page_url = window.location.href;
+    payload.page_title = document.title;
+    payload.site_language = language;
+    payload.submitted_at = new Date().toISOString();
+    payload.referrer = document.referrer || "";
 
     if (status) {
       status.textContent = t.sending;
@@ -225,7 +230,8 @@
       await fetch(TECHNOLOGY_HORIZONS_ENDPOINT, {
         method: "POST",
         mode: FETCH_MODE,
-        body: new URLSearchParams(formData)
+        headers: { "Content-Type": "text/plain;charset=utf-8" },
+        body: JSON.stringify(payload)
       });
 
       form.reset();
