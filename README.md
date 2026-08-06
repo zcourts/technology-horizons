@@ -1,6 +1,6 @@
 # Technology Horizons static site
 
-A raw HTML/CSS/JS static site for `zcourts.github.io/opole-technology-horizons`.
+A raw HTML/CSS/JS static site for `zcourts.github.io/technology-horizons`.
 
 ## Design notes
 
@@ -10,13 +10,11 @@ The default language is Polish. English pages live under `/en/`.
 
 ## Publishing on GitHub Pages
 
-1. Create a repository named `opole-technology-horizons` under the `zcourts` GitHub account.
-2. Copy these files into the repository root.
-3. Enable GitHub Pages from the main branch root.
-4. The site will publish at:
-   `https://zcourts.github.io/opole-technology-horizons/`
+GitHub Pages is configured to use GitHub Actions. Pushing to `main` runs
+`.github/workflows/static.yml` and publishes the site at
+`https://zcourts.github.io/technology-horizons/`.
 
-The internal links use the `/opole-technology-horizons/` project path, so they are ready for that GitHub Pages URL.
+The internal links use the `/technology-horizons/` project path, so they are ready for that GitHub Pages URL.
 
 ## Google Sheet submissions
 
