@@ -1,0 +1,15 @@
+<svg width="96" height="96" viewBox="0 0 96 96" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">Technology Horizons logo</title>
+  <desc id="desc">Geometric horizon mark for Technology Horizons.</desc>
+  <rect width="96" height="96" rx="24" fill="url(#g)"/>
+  <path d="M48 14 78 31v34L48 82 18 65V31L48 14Z" stroke="white" stroke-width="4" stroke-linejoin="round"/>
+  <path d="M48 14v68M18 31l60 34M78 31 18 65" stroke="white" stroke-width="2.8" stroke-linecap="round" opacity=".78"/>
+  <circle cx="48" cy="48" r="6" fill="white"/>
+  <defs>
+    <linearGradient id="g" x1="8" y1="8" x2="88" y2="88" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0B5FFF"/>
+      <stop offset=".55" stop-color="#053A7A"/>
+      <stop offset="1" stop-color="#081B3F"/>
+    </linearGradient>
+  </defs>
+</svg>
