@@ -2,30 +2,6 @@
 
 A raw HTML/CSS/JS static site for `zcourts.github.io/opole-technology-horizons`.
 
-## Structure
-
-```text
-.
-├── index.html                         # Polish default home page
-├── wydarzenia/index.html              # Polish events page
-├── wydarzenia/2026-09/index.html      # Placeholder page for first event
-├── prelegenci/index.html              # Polish speakers page
-├── spolecznosc/index.html             # Polish community page
-├── en/index.html                      # English home page
-├── en/events/index.html               # English events page
-├── en/events/2026-09/index.html       # English placeholder page for first event
-├── en/speakers/index.html             # English speakers page
-├── en/community/index.html            # English community page
-├── assets/css/styles.css              # Shared CSS
-├── assets/js/site.js                  # Shared dialog + submission JS
-├── assets/img/logo.svg                # Logo
-├── assets/img/social-card.svg         # Open Graph image
-├── docs/google-sheets-endpoint.example.gs
-├── robots.txt
-├── sitemap.xml
-└── .nojekyll
-```
-
 ## Design notes
 
 The layout intentionally avoids a box-heavy look. It uses editorial sections, soft gradients, timeline elements, ribbons, and a small number of cards only where they help with hierarchy.
